@@ -1,6 +1,18 @@
 <div>
     <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
 
+    @session('error')
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {{ $value }}
+        </div>
+    @endSession
+
+    @session('success')
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ $value }}
+        </div>
+    @endSession
+
     @if (session()->has('message'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {{ session('message') }}

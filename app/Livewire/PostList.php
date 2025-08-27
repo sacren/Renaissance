@@ -29,10 +29,18 @@ class PostList extends Component
     {
     }
 
-    public function deletePost(Post $post)
+    public function deletePost($id)
     {
+        $post = Post::find($id);
+
+        if (! $post) {
+            session()->flash('error', 'Post not found.');
+            return;
+        }
+
         $this->authorize('delete', $post);
         $post->delete();
+        session()->flash('success', 'Post deleted successfully!');
     }
 
     public function savePost()
