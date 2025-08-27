@@ -1,4 +1,4 @@
-<div class="py-12">
+<div>
     <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
 
     @if (session()->has('message'))

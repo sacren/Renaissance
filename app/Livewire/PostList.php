@@ -49,9 +49,6 @@ class PostList extends Component
 
         // Reset form fields
         $this->reset(['title', 'content']);
-
-        // Optionally emit an event so other components (like PostList) can react
-        $this->dispatch('post-created');
     }
 
     public function render()
