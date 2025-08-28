@@ -64,6 +64,11 @@ class PostList extends Component
         $this->reset(['title', 'content', 'editPostId']);
     }
 
+    public function cancelEdit()
+    {
+        $this->reset(['title', 'content', 'editPostId']);
+    }
+
     public function deletePost($id)
     {
         $post = Post::find($id);
