@@ -41,6 +41,29 @@ class PostList extends Component
         $this->editPostId = $id;
     }
 
+    public function updatePost()
+    {
+        $this->validate();
+
+        $post = Post::find($this->editPostId);
+
+        if (! $post) {
+            session()->flash('error', 'Post not found.');
+            return;
+        }
+
+        $this->authorize('update', $post);
+
+        $post->update([
+            'title' => $this->title,
+            'content'  => $this->content,
+        ]);
+
+        session()->flash('success', 'Post updated successfully!');
+
+        $this->reset(['title', 'content', 'editPostId']);
+    }
+
     public function deletePost($id)
     {
         $post = Post::find($id);
