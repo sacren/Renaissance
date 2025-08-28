@@ -11,6 +11,7 @@ class PostList extends Component
 {
     public $title = '';
     public $content = '';
+    public $editPostId = null;
 
     protected $rules = [
         'title' => [
@@ -25,8 +26,19 @@ class PostList extends Component
         ],
     ];
 
-    public function editPost()
+    public function editPost($id)
     {
+        $post = Post::findOrFail($id);
+
+        if (! $post) {
+            session()->flash('error', 'Post not found.');
+            return;
+        }
+
+        $this->authorize('update', $post);
+        $this->title = $post->title;
+        $this->content = $post->content;
+        $this->editPostId = $id;
     }
 
     public function deletePost($id)

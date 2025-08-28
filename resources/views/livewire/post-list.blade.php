@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <form wire:submit="savePost" class="space-y-4">
+    <form wire:submit="{{ $editPostId ? 'updatePost' : 'savePost' }}" class="space-y-4">
         <div>
             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
             <input type="text" id="title" wire:model="title"
@@ -43,13 +43,23 @@
         </div>
 
         <div>
-            <button type="submit"
-                class="inline-flex justify-center py-2 px-4 border border-transparent
-                    shadow-sm text-sm font-medium rounded-md text-white bg-blue-600
-                    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2
-                    focus:ring-blue-500">
-                Save Post
-            </button>
+            @if ($editPostId)
+                <button type="submit"
+                    class="inline-flex justify-center py-2 px-4 border border-transparent
+                        shadow-sm text-sm font-medium rounded-md text-white bg-blue-600
+                        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                        focus:ring-blue-500">
+                    Update Post
+                </button>
+            @else
+                <button type="submit"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent
+                               shadow-sm text-sm font-medium rounded-md text-white bg-blue-600
+                               hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                               focus:ring-blue-500">
+                    Create Post
+                </button>
+            @endif
         </div>
     </form>
 
@@ -77,7 +87,7 @@
 
                         <!-- Footer -->
                         <footer class="mt-6 pt-4 border-t bg-gray-50 px-6 py-4">
-                            <button type="button" wire:click="editPost"
+                            <button type="button" wire:click="editPost({{ $post->id }})"
                                 class="text-blue-600 hover:underline font-medium mr-4">
                                 Edit
                             </button>
