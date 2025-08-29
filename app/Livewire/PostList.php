@@ -5,10 +5,13 @@ namespace App\Livewire;
 use App\Models\Post;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('All Posts')]
 class PostList extends Component
 {
+    use WithPagination;
+
     public $title = '';
     public $content = '';
     public $editPostId = null;
@@ -102,7 +105,7 @@ class PostList extends Component
     public function render()
     {
         return view('livewire.post-list', [
-            'posts' => Post::all(),
+            'posts' => Post::with('user')->latest()->paginate(3),
         ]);
     }
 }

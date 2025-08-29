@@ -106,6 +106,11 @@
                     </div>
                 </article>
             @endforeach
+
+            <!-- Pagination -->
+            <div class="mt-8">
+                {{ $posts->links() }}
+            </div>
         @else
             <p class="text-center text-gray-500">No posts available.</p>
         @endif
