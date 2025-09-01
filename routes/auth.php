@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
         ->name('password.confirm');
 });
 
-Route::get('logout', function () {
+Route::any('logout', function () {
     abort(404);
 });
 
